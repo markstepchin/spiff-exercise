@@ -35,10 +35,12 @@
 
   font-weight: 500;
 
+  // border animation increases the height of the button, even with box-sizing: border box
+  // explicitly setting height keeps fixed and fixes layout thrash
+  height: 48px;
   width: 200px;
   margin-top: 24px;
   margin-right: 8px;
-  padding: 0.8rem 1.75rem;
 
   text-transform: uppercase;
 

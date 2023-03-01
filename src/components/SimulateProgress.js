@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import ProgressBar from "./ProgressBar";
 
-const INITIAL_LOADING_TIME = 1;
+const INITIAL_LOADING_TIME = 15;
 const HANGING_BREAKPOINT = 90;
 const SECONDS_SHOWN_AFTER_LOADED = 3;
 
@@ -48,7 +48,7 @@ const SimulateProgressBar = () => {
       // set progress to 0 after progress bar has faded out
       setTimeout(
         () => setProgress(0),
-        [SECONDS_SHOWN_AFTER_LOADED * 1000 + 1000]
+        [SECONDS_SHOWN_AFTER_LOADED * 1000 + 300]
       );
     }
 

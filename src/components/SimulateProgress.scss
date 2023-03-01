@@ -73,3 +73,8 @@ i {
   margin-top: 8px;
   color: $gray;
 }
+
+.fade-out {
+  opacity: 0;
+  transition: opacity 0.3s;
+}

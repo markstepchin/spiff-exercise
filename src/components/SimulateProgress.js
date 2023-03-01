@@ -43,8 +43,13 @@ const SimulateProgressBar = () => {
       setTimeout(() => {
         clearInterval(interval);
         setLoading(LOADING_STATE.NOT_STARTED);
-        setProgress(0);
       }, [SECONDS_SHOWN_AFTER_LOADED * 1000]);
+
+      // set progress to 0 after progress bar has faded out
+      setTimeout(
+        () => setProgress(0),
+        [SECONDS_SHOWN_AFTER_LOADED * 1000 + 1000]
+      );
     }
 
     return () => clearInterval(interval);
@@ -94,7 +99,9 @@ const SimulateProgressBar = () => {
         </div>
       </div>
 
-      {isLoading ? <ProgressBar progress={progress} /> : null}
+      <div className={!isLoading ? "fade-out" : ""}>
+        <ProgressBar progress={progress} />
+      </div>
 
       {loading === LOADING_STATE.COMPLETE && (
         <i>progress bar will disappear in 3 seconds</i>

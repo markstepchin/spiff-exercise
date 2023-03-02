@@ -1,0 +1,80 @@
+.simulate-request {
+  padding: 24px;
+  margin-bottom: 48px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+  label {
+    display: flex;
+    align-items: center;
+
+    &.disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  h3 {
+    margin-bottom: 8px;
+  }
+
+  input {
+    margin-left: 8px;
+    width: 36px;
+    padding: 8px;
+
+    border: solid 1px $gray-light;
+    border-radius: 4px;
+  }
+}
+
+.button {
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 48px;
+  transition: border-width 0.1s linear;
+
+  font-weight: 500;
+
+  // border animation increases the height of the button, even with box-sizing: border box
+  // explicitly setting height keeps fixed and fixes layout thrash
+  height: 48px;
+  width: 200px;
+  margin-top: 24px;
+  margin-right: 8px;
+
+  text-transform: uppercase;
+
+  &:hover {
+    border-width: 2px;
+  }
+
+  &:active {
+    border-width: 3px;
+  }
+
+  &.start {
+    color: $green;
+    border-color: $green;
+  }
+
+  &.end {
+    color: $red;
+    border-color: $red;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+i {
+  display: inline-block;
+  margin-top: 8px;
+  color: $gray;
+}
+
+.fade-out {
+  opacity: 0;
+  transition: opacity 0.3s;
+}

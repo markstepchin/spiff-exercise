@@ -33,11 +33,25 @@ const SimulateProgressBar = () => {
 
       interval = setInterval(
         () =>
-          setProgress((prev) =>
-            prev < HANGING_BREAKPOINT
+          setProgress((prev) => {
+            if (useBreakpoints) {
+              const breakpointHit = BREAKPOINTS.some(
+                (breakpoint) =>
+                  breakpoint > prev && breakpoint < prev + progressIncrement
+              );
+
+              if (breakpointHit) {
+                // increase by less than the standard increment
+                return prev < HANGING_BREAKPOINT
+                  ? prev + progressIncrement / 30
+                  : HANGING_BREAKPOINT;
+              }
+            }
+
+            return prev < HANGING_BREAKPOINT
               ? prev + progressIncrement
-              : HANGING_BREAKPOINT
-          ),
+              : HANGING_BREAKPOINT;
+          }),
         1000 / 10
       );
     }

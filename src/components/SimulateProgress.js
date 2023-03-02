@@ -19,7 +19,8 @@ const SimulateProgressBar = () => {
 
   // progress bar starts at width of 0% and takes 15 seconds to reach 90%
   // width-increase/second: 90% / 15sec = 6% / sec
-  const progressIncrement = HANGING_BREAKPOINT / seconds;
+  // diving by 10 on both progressIncrement and interval for smoother animation
+  const progressIncrement = HANGING_BREAKPOINT / seconds / 10;
 
   useEffect(() => {
     if (loading === LOADING_STATE.LOADING) {
@@ -33,7 +34,7 @@ const SimulateProgressBar = () => {
               ? prev + progressIncrement
               : HANGING_BREAKPOINT
           ),
-        1000
+        1000 / 10
       );
     }
 

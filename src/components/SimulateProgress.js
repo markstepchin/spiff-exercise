@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import ProgressBar from "./ProgressBar";
+import Switch from "react-switch";
 
 const INITIAL_LOADING_TIME = 15;
 const HANGING_BREAKPOINT = 90;
@@ -11,15 +12,18 @@ const LOADING_STATE = {
   COMPLETE: "COMPLETE",
 };
 
+const BREAKPOINTS = [20, 50, 70];
+
 const SimulateProgressBar = () => {
   let interval = useRef(null);
+  const [useBreakpoints, setUseBreakpoints] = useState(false);
   const [seconds, setSeconds] = useState(INITIAL_LOADING_TIME);
   const [progress, setProgress] = useState(0);
   const [loading, setLoading] = useState(LOADING_STATE.NOT_STARTED);
 
   // progress bar starts at width of 0% and takes 15 seconds to reach 90%
   // width-increase/second: 90% / 15sec = 6% / sec
-  // diving by 10 on both progressIncrement and interval for smoother animation
+  // dividing by 10 on both progressIncrement and interval for smoother animation
   const progressIncrement = HANGING_BREAKPOINT / seconds / 10;
 
   useEffect(() => {
@@ -78,6 +82,33 @@ const SimulateProgressBar = () => {
             disabled={isLoading}
           />
         </label>
+
+        <div className={`breakpoint-container ${isLoading ? "disabled" : ""}`}>
+          <h4>Include breakpoints?</h4>
+          <Switch
+            checked={useBreakpoints}
+            onChange={() => setUseBreakpoints((prev) => !prev)}
+            onColor="gray"
+            uncheckedIcon={false}
+            checkedIcon={false}
+            boxShadow="0px 1px 5px rgba(0, 0, 0, 0.3)"
+            handleDiameter={20}
+            height={15}
+            width={36}
+          />
+          {useBreakpoints ? (
+            <div className="breakpoints">
+              Breakpoints: [{BREAKPOINTS.length === 0 ? " " : ""}
+              {BREAKPOINTS.map((b, i) => (
+                <>
+                  {b}
+                  {i === BREAKPOINTS.length - 1 ? "" : ", "}
+                </>
+              ))}
+              ]
+            </div>
+          ) : null}
+        </div>
 
         <div>
           <button
